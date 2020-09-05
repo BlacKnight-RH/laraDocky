@@ -1,11 +1,11 @@
 # Set master image
-FROM php:7.2-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 # Copy composer.lock and composer.json
-COPY ./app/composer.lock ./app/composer.json /var/www/laravel_app/app/
+COPY ./app/composer.lock ./app/composer.json /var/www/laravel_app/
 
 # Set working directory
-WORKDIR /var/www/laravel_app/app
+WORKDIR /var/www/laravel_app
 
 # Install Additional dependencies
 RUN apk update && apk add --no-cache \
@@ -42,14 +42,13 @@ RUN rm -rf /var/cache/apk/*
 RUN usermod -u 1000 www-data
 
 # Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www/laravel_app
+COPY --chown=www-data:www-data ./app /var/www/laravel_app
 
 # Change current user to www
 USER www-data
 
 # install laravel dependency and generate key for our app 
 RUN composer install 
-RUN php artisan key:generate 
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000

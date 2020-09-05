@@ -15,7 +15,7 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www/laravel_app
     volumes:
-      - ./:/var/www/laravel_app
+      - ./app:/var/www/laravel_app
       # - ./server_config/php.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - laravel-app-network
@@ -34,7 +34,6 @@ services:
       - 4433:443
 
     volumes:
-      - ./:/var/www/laravel_app
       - ./server_config/nginx/conf.d/nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - laravel-app-network
@@ -58,7 +57,7 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - dbdata:/var/lib/mysql/
-      - ./server_config/db/my.cnf:/etc/mysql/my.cnf
+      - ./server_config/db/my.cnf:/etc/mysql/my.conf
     networks:
       - laravel-app-network
 
