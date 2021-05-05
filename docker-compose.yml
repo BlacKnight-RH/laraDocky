@@ -56,7 +56,7 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - dbdata:/var/lib/mysql/
+      - ./dbdata:/var/lib/mysql/
       - ./server_config/db/my.cnf:/etc/mysql/my.conf
     networks:
       - laravel-app-network
